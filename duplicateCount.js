@@ -1,23 +1,27 @@
-function duplicateCount(text) {
-    let count = 0;
-    let arr = new Array(200).fill(0);
-    let filter;
-    let size = text.length;
-    text = text.toLowerCase();
-    for (i = 0; i < size; i++) {
-        for (j = i + 1; j < size; j++) {
+const duplicateCount = text => {
 
-            if (text[i] === text[j]) {
-                count++;
-                arr[text[i].charCodeAt(0)] += 1;
-                break;
-            }
+    let input = text.toLowerCase().split('');
+
+    let obj = {};
+
+    for (i in input) {
+        if (!obj[input[i]]) {
+            obj[input[i]] = 1;
+        } else {
+            obj[input[i]] += 1;
         }
     }
-    filter = arr.filter(el => el != null && el != 0)
-    // console.log(filter);
-    return filter.length;
-}
 
-let text = "hello";
-console.log(duplicateCount(text));
+    let result = 0;
+
+    for (prop in obj) {
+        if (obj[prop] > 1) {
+            result++;
+        }
+    }
+
+    return result;
+
+};
+
+console.log(duplicateCount("invisiiiibilibty"));
